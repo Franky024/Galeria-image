@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Subir Imagenes</title>
+    <!--Agregamos el archivo head similar a como se haria con un include en php -->
+    <%- include("partials/head") -%>
+</head>
+
+<body>
+
+    <!--Lo mismo con el archivo navigation para no reutilizar codigo-->
+    <%- include("partials/navigation") %>
+
+    <div class="container p-4">
+        <div class="row">
+            <div class="card-columns">
+                
+                <!--Con ejs podemos realizar bucles y otras funciones dentro del html -->
+                <% images.forEach(function (image) { %>
+                <!--Mostrar iamgenes de la base de datos-->
+                <div class="card animated fadeInDown">
+                    <img src="<%= image.path %>" class="card-img-top" alt="<%= image.filename %>">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= image.title %></h5>
+                        <p class="card-text"><%= image.description %></p>
+                        <p><%= format(image.created_at) %></p>
+                        <a href="/image/<%= image._id %>" class="btn btn-primary">
+                           View 
+                        </a>
+                    </div>
+                </div>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
